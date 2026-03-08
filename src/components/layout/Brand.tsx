@@ -9,15 +9,15 @@ type BrandProps = {
 
 export function Brand({ light = false }: BrandProps) {
   return (
-    <Link href="/" className="inline-flex items-center gap-3">
+    <Link href="/" className="inline-flex h-full items-center gap-3">
       <Image
         src={light ? "/images/logo-white.svg" : "/images/logo.svg"}
         alt={siteConfig.logoAlt}
-        width={56}
-        height={24}
-        className="h-7 w-auto shrink-0 md:h-8"
+        width={84}
+        height={36}
+        className="block h-8 w-auto shrink-0 md:h-9"
       />
-      <div className="leading-tight">
+      <div className="flex items-center leading-tight">
         <p
           className={clsx(
             "font-poppins text-[1.15rem] font-medium tracking-[0.02em]",
