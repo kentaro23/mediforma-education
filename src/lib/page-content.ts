@@ -21,11 +21,10 @@ export const kobetsuPageContent = {
 } as const;
 
 export const aboutPageContent = {
-  heroTitle: "会社概要",
+  heroTitle: "事業概要",
   profileHeading: "基本情報",
   serviceNameLabel: "サービス名",
   representativeLabel: "代表",
-  affiliationLabel: "所属",
   locationLabel: "所在地",
   emailLabel: "メール",
   phoneLabel: "電話",
@@ -35,7 +34,6 @@ export const aboutPageContent = {
   relatedLabel: "関連事業",
   serviceName: "Mediforma Education（Mediforma内事業）",
   representative: "村山 雄大（Yudai Murayama）",
-  affiliation: "北里大学医学部",
   location: "相模大野・町田エリア（詳細はお問い合わせ時にご案内）",
   mission: "技術と思いやりを備え、社会に貢献する医師を育む",
   vision: "医学部入学〜医療DXまでを人材と仕組みで支える",

@@ -5,7 +5,7 @@ export const siteConfig = {
   siteTagline: "確かな道筋を、ここから。",
   logoAlt: "Mediforma Education ロゴ",
   phone: "080-9322-6024",
-  email: "mediforma1@gmail.com",
+  email: "education@mediforma.jp",
   parentServiceName: "Mediforma",
   parentServiceUrl: "https://mediforma.com",
   copyright: "© 2026 Mediforma Education. All rights reserved.",
@@ -21,7 +21,7 @@ export const navItems: NavItem[] = [
   { label: "ホーム", href: "/" },
   { label: "指定校推薦対策", href: "/shiteiko" },
   { label: "個別指導塾", href: "/kobetsu" },
-  { label: "会社概要", href: "/about" },
+  { label: "事業概要", href: "/about" },
   { label: "お問い合わせ", href: "/contact" }
 ];
 

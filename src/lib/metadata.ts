@@ -42,7 +42,7 @@ export const kobetsuMetadata: Metadata = {
 };
 
 export const aboutMetadata: Metadata = {
-  title: "会社概要 | Mediforma Education",
+  title: "事業概要 | Mediforma Education",
   description: "Mediforma Educationの事業概要、代表情報、教育理念をご案内します。"
 };
 

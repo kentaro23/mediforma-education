@@ -44,10 +44,15 @@ export function PricingTable({
           </div>
           <div className="divide-y divide-neutralGray-100">
             {singleRows.map((row) => (
-              <div key={row.title} className="grid gap-2 px-5 py-4 md:grid-cols-[1fr_auto_auto] md:items-center md:gap-4">
+              <div
+                key={row.title}
+                className="grid gap-2 px-5 py-4 md:grid-cols-[minmax(0,1fr)_10.5rem_8.5rem] md:items-center md:gap-4"
+              >
                 <p className="font-medium text-navy-900">{row.title}</p>
-                <p className="text-lg font-semibold text-teal-500">{row.price}</p>
-                <p className="text-sm text-neutralGray-600">{row.notes}</p>
+                <p className="justify-self-end text-right text-lg font-semibold tabular-nums text-teal-500">{row.price}</p>
+                <p className="justify-self-end whitespace-nowrap text-right text-sm tabular-nums text-neutralGray-600">
+                  {row.notes}
+                </p>
               </div>
             ))}
           </div>
@@ -59,17 +64,21 @@ export function PricingTable({
             {setRows.map((row) => (
               <div
                 key={row.title}
-                className={`grid gap-2 px-5 py-4 md:grid-cols-[1fr_auto_1.4fr] md:items-center md:gap-4 ${
+                className={`grid gap-2 px-5 py-4 md:grid-cols-[minmax(0,1fr)_10.5rem_22rem] md:items-center md:gap-4 ${
                   row.title === "全講座セット" ? "bg-teal-100/50" : ""
                 }`}
               >
                 <p className={`font-medium text-navy-900 ${row.title === "全講座セット" ? "text-base font-semibold" : ""}`}>
                   {row.title}
                 </p>
-                <p className={`text-lg font-semibold ${row.title === "全講座セット" ? "text-navy-900" : "text-teal-500"}`}>
+                <p
+                  className={`justify-self-end text-right text-lg font-semibold tabular-nums ${
+                    row.title === "全講座セット" ? "text-navy-900" : "text-teal-500"
+                  }`}
+                >
                   {row.price}
                 </p>
-                <p className="text-sm">{renderSavings(row.notes)}</p>
+                <p className="justify-self-end text-right text-sm">{renderSavings(row.notes)}</p>
               </div>
             ))}
           </div>

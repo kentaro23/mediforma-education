@@ -29,10 +29,6 @@ export default function AboutPage() {
                 <dd>{aboutPageContent.representative}</dd>
               </div>
               <div>
-                <dt className="font-semibold text-navy-900">{aboutPageContent.affiliationLabel}</dt>
-                <dd>{aboutPageContent.affiliation}</dd>
-              </div>
-              <div>
                 <dt className="font-semibold text-navy-900">{aboutPageContent.locationLabel}</dt>
                 <dd>{aboutPageContent.location}</dd>
               </div>
