@@ -1,3 +1,5 @@
+"use client";
+
 import { SectionHeading } from "@/components/shared/SectionHeading";
 import { Card } from "@/components/ui/Card";
 import { Tabs } from "@/components/ui/Tabs";
