@@ -12,6 +12,7 @@ import { uiText } from "@/lib/ui-text";
 export function Header() {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const isTop = !scrolled;
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8);
@@ -32,14 +33,23 @@ export function Header() {
       <header
         className={clsx(
           "fixed inset-x-0 top-0 z-50 transition-all duration-300",
-          scrolled ? "border-b border-neutralGray-100 bg-white/95 shadow-sm backdrop-blur" : "bg-transparent"
+          scrolled
+            ? "border-b border-neutralGray-100 bg-white/95 shadow-sm backdrop-blur"
+            : "border-b border-white/10 bg-navy-900/45 backdrop-blur-md"
         )}
       >
         <div className="mx-auto flex h-20 w-full max-w-6xl items-center justify-between px-4 md:px-6">
-          <Brand />
+          <Brand light={isTop} />
           <nav className="hidden items-center gap-6 md:flex">
             {navItems.map((item) => (
-              <Link key={item.href} href={item.href} className="text-sm font-medium text-navy-900 hover:text-teal-500">
+              <Link
+                key={item.href}
+                href={item.href}
+                className={clsx(
+                  "text-sm font-medium transition-colors",
+                  isTop ? "text-white/90 hover:text-teal-400" : "text-navy-900 hover:text-teal-500"
+                )}
+              >
                 {item.label}
               </Link>
             ))}
@@ -53,7 +63,12 @@ export function Header() {
             type="button"
             onClick={() => setIsOpen((prev) => !prev)}
             aria-label={uiText.header.menuAria}
-            className="inline-flex h-10 w-10 items-center justify-center rounded-lg border border-neutralGray-100 bg-white text-navy-900 md:hidden"
+            className={clsx(
+              "inline-flex h-10 w-10 items-center justify-center rounded-lg border md:hidden",
+              isTop
+                ? "border-white/20 bg-white/10 text-white"
+                : "border-neutralGray-100 bg-white text-navy-900"
+            )}
           >
             {isOpen ? "×" : "☰"}
           </button>
