@@ -6,7 +6,7 @@ export const shiteikoCourseDetails: CourseDetail[] = [
     title: "小論文対策",
     format: "対面2回（添削付き）+ オンライン4回（添削付き）",
     duration: "90分 × 6コマ",
-    price: "68,000円",
+    price: "88,000円",
     points: [
       "小論文の書き方の基礎（構成、論理展開、文章表現）",
       "北里大学に特化した出題傾向の分析",
@@ -20,7 +20,7 @@ export const shiteikoCourseDetails: CourseDetail[] = [
     title: "集団・個人面接対策",
     format: "対面14回",
     duration: "90分 × 14コマ",
-    price: "92,000円",
+    price: "118,000円",
     points: [
       "実際に指定校推薦で合格した北里生が直接アドバイス",
       "入室〜退室の作法を細かく指導",
@@ -36,7 +36,7 @@ export const shiteikoCourseDetails: CourseDetail[] = [
     title: "医療時事対策",
     format: "オンライン4回 + 対面2回",
     duration: "90分 × 6コマ",
-    price: "55,000円",
+    price: "74,000円",
     points: [
       "6月にオンライン4コマ、11月に対面2コマ開催",
       "その年のノーベル賞の解説",
@@ -51,7 +51,7 @@ export const shiteikoCourseDetails: CourseDetail[] = [
     title: "学科試験対策",
     format: "オンライン8回 + 対面2回（模擬テスト）",
     duration: "90分 × 10コマ",
-    price: "85,000円",
+    price: "108,000円",
     points: [
       "100分で4科目という独自形式を徹底対策",
       "推薦入試で求められる解答法をレクチャー",

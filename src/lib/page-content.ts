@@ -34,7 +34,7 @@ export const aboutPageContent = {
   parentLabel: "親事業",
   relatedLabel: "関連事業",
   serviceName: "Mediforma Education（Mediforma内事業）",
-  representative: "大原 健太郎（Kentaro Ohara）",
+  representative: "村山 雄大（Yudai Murayama）",
   affiliation: "北里大学医学部",
   location: "相模大野・町田エリア（詳細はお問い合わせ時にご案内）",
   mission: "技術と思いやりを備え、社会に貢献する医師を育む",
