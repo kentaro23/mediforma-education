@@ -32,7 +32,7 @@ export const topMetadata: Metadata = {
 export const shiteikoMetadata: Metadata = {
   title: "北里大学医学部 指定校推薦 完全対策講座 | Mediforma Education",
   description:
-    "過去問非公開の北里大学医学部指定校推薦を攻略。小論文・面接・学科・医療時事の4講座、全36コマで250,000円。現役北里医学部生が直接指導。"
+    "過去問非公開の北里大学医学部指定校推薦を攻略。小論文・面接・学科・医療時事の4講座、全36コマで328,000円。現役北里医学部生が直接指導。"
 };
 
 export const kobetsuMetadata: Metadata = {
@@ -43,7 +43,7 @@ export const kobetsuMetadata: Metadata = {
 
 export const aboutMetadata: Metadata = {
   title: "事業概要 | Mediforma Education",
-  description: "Mediforma Educationの事業概要、代表情報、教育理念をご案内します。"
+  description: "Mediforma Educationの事業概要、事業責任者情報、教育理念をご案内します。"
 };
 
 export const contactMetadata: Metadata = {

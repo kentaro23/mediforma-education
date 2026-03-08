@@ -24,7 +24,7 @@ export const aboutPageContent = {
   heroTitle: "事業概要",
   profileHeading: "基本情報",
   serviceNameLabel: "サービス名",
-  representativeLabel: "代表",
+  representativeLabel: "事業責任者",
   locationLabel: "所在地",
   emailLabel: "メール",
   phoneLabel: "電話",
@@ -38,10 +38,10 @@ export const aboutPageContent = {
   mission: "技術と思いやりを備え、社会に貢献する医師を育む",
   vision: "医学部入学〜医療DXまでを人材と仕組みで支える",
   relatedServices: ["Mediforma Society", "Mediforma DX", "Mediforma Consulting"],
-  messageTitle: "代表メッセージ",
+  messageTitle: "事業責任者メッセージ",
   messageBody:
     "Mediforma Educationは、受験テクニックの提供だけでなく、医療人としての土台づくりまで見据えた教育を重視しています。受験生と保護者の不安に正面から向き合い、進路選択を伴走することをお約束します。",
-  photoPlaceholder: "代表写真プレースホルダー"
+  photoPlaceholder: "事業責任者写真プレースホルダー"
 } as const;
 
 export const contactPageContent = {
