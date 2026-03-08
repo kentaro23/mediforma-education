@@ -19,7 +19,7 @@ export function HeroSection() {
             hidden: {},
             show: { transition: { staggerChildren: 0.12 } }
           }}
-          className="max-w-4xl space-y-6"
+          className="space-y-6"
         >
           <motion.p
             variants={{ hidden: { opacity: 0, y: 18 }, show: { opacity: 1, y: 0 } }}
@@ -35,7 +35,7 @@ export function HeroSection() {
           </motion.h1>
           <motion.p
             variants={{ hidden: { opacity: 0, y: 18 }, show: { opacity: 1, y: 0 } }}
-            className="max-w-3xl leading-relaxed text-white/85"
+            className="leading-relaxed text-white/85 lg:whitespace-nowrap"
           >
             {homePageData.hero.subtitle}
           </motion.p>
