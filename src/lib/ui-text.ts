@@ -8,6 +8,6 @@ export const uiText = {
   },
   pricing: {
     singleCourses: "単科講座",
-    setPlan: "セットプラン ★おすすめ"
+    setPlan: "セットプラン ★ おすすめ"
   }
 } as const;

@@ -19,6 +19,20 @@ export function PricingTable({
   materialFee,
   comparisonNote
 }: PricingTableProps) {
+  const renderSavings = (notes: string) => {
+    const [lessonPart, savingsPart] = notes.split(" ／ ");
+    if (!savingsPart) return <span>{notes}</span>;
+
+    return (
+      <span>
+        <span className="text-neutralGray-600">{lessonPart}</span>
+        <span className="mx-1 text-neutralGray-400">／</span>
+        <span className="font-medium text-navy-800">{savingsPart.split("から")[0]}から</span>
+        <span className="font-semibold text-amber-500">{savingsPart.split("から")[1]}</span>
+      </span>
+    );
+  };
+
   return (
     <section className="bg-white py-16 md:py-20">
       <div className="mx-auto max-w-6xl space-y-8 px-4 md:px-6">
@@ -32,21 +46,30 @@ export function PricingTable({
             {singleRows.map((row) => (
               <div key={row.title} className="grid gap-2 px-5 py-4 md:grid-cols-[1fr_auto_auto] md:items-center md:gap-4">
                 <p className="font-medium text-navy-900">{row.title}</p>
-                <p className="font-semibold text-teal-500">{row.price}</p>
+                <p className="text-lg font-semibold text-teal-500">{row.price}</p>
                 <p className="text-sm text-neutralGray-600">{row.notes}</p>
               </div>
             ))}
           </div>
 
-          <div className="border-y border-neutralGray-100 bg-amber-100 px-5 py-4">
+          <div className="border-y border-neutralGray-100 bg-gradient-to-r from-amber-100 to-teal-100 px-5 py-4">
             <h3 className="font-semibold text-navy-900">{uiText.pricing.setPlan}</h3>
           </div>
-          <div className="divide-y divide-neutralGray-100">
+          <div className="divide-y divide-neutralGray-100 bg-teal-100/20">
             {setRows.map((row) => (
-              <div key={row.title} className="grid gap-2 px-5 py-4 md:grid-cols-[1fr_auto_1.4fr] md:items-center md:gap-4">
-                <p className="font-medium text-navy-900">{row.title}</p>
-                <p className="font-semibold text-teal-500">{row.price}</p>
-                <p className="text-sm text-neutralGray-600">{row.notes}</p>
+              <div
+                key={row.title}
+                className={`grid gap-2 px-5 py-4 md:grid-cols-[1fr_auto_1.4fr] md:items-center md:gap-4 ${
+                  row.title === "全講座セット" ? "bg-teal-100/50" : ""
+                }`}
+              >
+                <p className={`font-medium text-navy-900 ${row.title === "全講座セット" ? "text-base font-semibold" : ""}`}>
+                  {row.title}
+                </p>
+                <p className={`text-lg font-semibold ${row.title === "全講座セット" ? "text-navy-900" : "text-teal-500"}`}>
+                  {row.price}
+                </p>
+                <p className="text-sm">{renderSavings(row.notes)}</p>
               </div>
             ))}
           </div>
