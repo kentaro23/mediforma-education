@@ -13,14 +13,14 @@ export function Brand({ light = false }: BrandProps) {
       <Image
         src={light ? "/images/logo-white.svg" : "/images/logo.svg"}
         alt={siteConfig.logoAlt}
-        width={84}
-        height={36}
-        className="block h-8 w-auto shrink-0 md:h-9"
+        width={96}
+        height={40}
+        className="block h-9 w-auto shrink-0 md:h-10"
       />
       <div className="flex items-center leading-tight">
         <p
           className={clsx(
-            "font-poppins text-[1.15rem] font-medium tracking-[0.02em]",
+            "font-poppins text-2xl font-medium tracking-[0.02em]",
             light ? "text-white" : "text-navy-900"
           )}
         >
