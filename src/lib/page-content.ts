@@ -33,7 +33,7 @@ export const aboutPageContent = {
   parentLabel: "親事業",
   relatedLabel: "関連事業",
   serviceName: "Mediforma Education（Mediforma内事業）",
-  representative: "村山 雄大（Yudai Murayama）",
+  representative: "村山雄大（MURAYAMA YUTA）",
   location: "相模大野・町田エリア（詳細はお問い合わせ時にご案内）",
   mission: "技術と思いやりを備え、社会に貢献する医師を育む",
   vision: "医学部入学〜医療DXまでを人材と仕組みで支える",
