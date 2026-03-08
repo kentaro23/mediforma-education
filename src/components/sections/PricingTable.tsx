@@ -64,7 +64,7 @@ export function PricingTable({
             {setRows.map((row) => (
               <div
                 key={row.title}
-                className={`grid gap-2 px-5 py-4 md:grid-cols-[minmax(0,1fr)_10.5rem_22rem] md:items-center md:gap-4 ${
+                className={`grid gap-2 px-5 py-4 md:grid-cols-[minmax(0,1fr)_10.5rem_auto] md:items-center md:gap-4 ${
                   row.title === "全講座セット" ? "bg-teal-100/50" : ""
                 }`}
               >
@@ -78,7 +78,7 @@ export function PricingTable({
                 >
                   {row.price}
                 </p>
-                <p className="justify-self-end text-right text-sm">{renderSavings(row.notes)}</p>
+                <p className="justify-self-center whitespace-nowrap text-center text-sm">{renderSavings(row.notes)}</p>
               </div>
             ))}
           </div>
