@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 
 const baseUrl = "https://mediforma-education.vercel.app";
 
-export const sharedMetadata = {
+export const sharedMetadata: Metadata = {
   metadataBase: new URL(baseUrl),
   openGraph: {
     type: "website",
@@ -21,7 +21,7 @@ export const sharedMetadata = {
     card: "summary_large_image",
     images: ["/images/og-image.png"]
   }
-} as const;
+};
 
 export const topMetadata: Metadata = {
   title: "Mediforma Education | 北里大学医学部 指定校推薦対策の専門予備校",
