@@ -9,7 +9,7 @@ type AccordionProps = {
 };
 
 export function Accordion({ items }: AccordionProps) {
-  const [openIndex, setOpenIndex] = useState(0);
+  const [openIndex, setOpenIndex] = useState(-1);
 
   return (
     <div className="space-y-3">
@@ -21,10 +21,13 @@ export function Accordion({ items }: AccordionProps) {
             <button
               type="button"
               onClick={() => setOpenIndex(isOpen ? -1 : index)}
-              className="flex w-full items-center justify-between gap-4 px-5 py-4 text-left"
+              aria-expanded={isOpen}
+              className="flex w-full items-start justify-between gap-4 px-5 py-4 text-left"
             >
-              <span className="font-medium text-navy-900">{item.question}</span>
-              <span className="text-teal-500">{isOpen ? "−" : "+"}</span>
+              <span className="flex-1 pr-2 text-[15px] font-medium leading-relaxed text-navy-900 md:text-base">
+                {item.question}
+              </span>
+              <span className="mt-0.5 shrink-0 text-teal-500">{isOpen ? "−" : "+"}</span>
             </button>
             <div
               className={clsx(

@@ -13,9 +13,9 @@ export function Brand({ light = false }: BrandProps) {
       <Image
         src={light ? "/images/logo-white.svg" : "/images/logo.svg"}
         alt={siteConfig.logoAlt}
-        width={36}
-        height={36}
-        className="h-9 w-9"
+        width={56}
+        height={24}
+        className="h-7 w-auto shrink-0 md:h-8"
       />
       <div className="leading-tight">
         <p
