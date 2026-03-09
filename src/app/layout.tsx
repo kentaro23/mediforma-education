@@ -4,6 +4,7 @@ import { Noto_Sans_JP, Poppins } from "next/font/google";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { MobileCTA } from "@/components/layout/MobileCTA";
+import { FamilyBanner } from "@/components/family-banner/FamilyBanner";
 import { siteConfig } from "@/lib/constants";
 import { sharedMetadata, topMetadata } from "@/lib/metadata";
 import { educationalOrganizationJsonLd } from "@/lib/structured-data";
@@ -48,6 +49,7 @@ export default function RootLayout({
         />
         <Header />
         <main>{children}</main>
+        <FamilyBanner />
         <Footer />
         <MobileCTA />
       </body>
