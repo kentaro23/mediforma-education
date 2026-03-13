@@ -45,12 +45,6 @@ export const blogPosts: BlogPost[] = [
     lead:
       "集団面接・個人面接で合格を勝ち取るために、本当に必要なことを、実際の指定校推薦合格者の知見をもとに解説します。",
     blocks: [
-      { type: "paragraph", text: "Mediforma Education × Blog Article" },
-      { type: "paragraph", text: "【現役北里医学部生が教える】" },
-      {
-        type: "paragraph",
-        text: "— 集団面接・個人面接で合格を勝ち取るために、本当に必要なこと —"
-      },
       { type: "heading", text: "はじめに：北里の指定校推薦、面接で落ちる人はいるの？" },
       {
         type: "paragraph",
@@ -279,24 +273,7 @@ export const blogPosts: BlogPost[] = [
       { type: "heading", text: "無料相談受付中" },
       { type: "paragraph", text: "お子様の現状と志望動機をお聞かせください。" },
       { type: "paragraph", text: "お問い合わせ: mediformaedu.com/contact" },
-      { type: "paragraph", text: "電話: 080-9322-6024 / メール: education@mediforma.jp" },
-      { type: "heading", text: "【記事情報】" },
-      { type: "paragraph", text: "URL: mediformaedu.com/blog/kitasato-shiteiko-mensetsu-taisaku" },
-      {
-        type: "paragraph",
-        text:
-          "SEOタイトル: 【現役北里医学部生が教える】北里大学医学部 指定校推薦 面接対策完全ガイド | Mediforma Education"
-      },
-      {
-        type: "paragraph",
-        text:
-          "meta description: 北里大学医学部の指定校推薦面接対策を現役北里医学部生が徹底解説。集団面接・個人面接のコツ、過去の出題テーマ傾向、対策スケジュールまで。"
-      },
-      {
-        type: "paragraph",
-        text:
-          "キーワード: 北里大学 医学部 指定校推薦 面接, 北里 指定校 集団面接, 北里大学 推薦 対策, 医学部 推薦入試 面接"
-      }
+      { type: "paragraph", text: "電話: 080-9322-6024 / メール: education@mediforma.jp" }
     ]
   }
 ];
