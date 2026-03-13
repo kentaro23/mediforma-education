@@ -19,11 +19,12 @@ export function ContactForm() {
 
   async function onSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
+    const form = event.currentTarget;
     setLoading(true);
     setStatus("idle");
     setErrorDetail("");
 
-    const formData = new FormData(event.currentTarget);
+    const formData = new FormData(form);
     const payload = {
       name: formData.get("name"),
       furigana: formData.get("furigana"),
@@ -55,7 +56,7 @@ export function ContactForm() {
       }
 
       setStatus("success");
-      event.currentTarget.reset();
+      form.reset();
     } catch (error) {
       if (error instanceof Error) {
         setErrorDetail(error.message);
