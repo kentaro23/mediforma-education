@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
 import clsx from "clsx";
 import { Brand } from "@/components/layout/Brand";
 import { MobileMenu } from "@/components/layout/MobileMenu";
@@ -11,10 +10,9 @@ import { ctaLabels, navItems } from "@/lib/constants";
 import { uiText } from "@/lib/ui-text";
 
 export function Header() {
-  const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const isTop = pathname === "/" && !scrolled;
+  const isTop = !scrolled;
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8);
