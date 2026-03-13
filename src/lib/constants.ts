@@ -21,6 +21,7 @@ export const navItems: NavItem[] = [
   { label: "ホーム", href: "/" },
   { label: "指定校推薦対策", href: "/shiteiko" },
   { label: "個別指導塾", href: "/kobetsu" },
+  { label: "ブログ", href: "/blog" },
   { label: "事業概要", href: "/about" },
   { label: "お問い合わせ", href: "/contact" }
 ];
