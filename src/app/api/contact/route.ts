@@ -53,42 +53,66 @@ async function sendToWebhook(endpoint: string, data: ContactPayload): Promise<De
 }
 
 async function sendToSmtp(data: ContactPayload): Promise<DeliveryResult> {
-  const host = process.env.SMTP_HOST;
+  const host = (process.env.SMTP_HOST ?? "").trim();
   const port = Number(process.env.SMTP_PORT ?? "465");
-  const user = process.env.SMTP_USER;
+  const user = (process.env.SMTP_USER ?? "").trim();
   const pass = process.env.SMTP_PASS;
 
-  if (!host || !user || !pass) {
+  if (!user || !pass) {
     return { ok: false, channel: "smtp", detail: "missing-smtp-env" };
   }
 
   const normalizedPass = pass.replace(/\s+/g, "");
   const nodemailer = await import("nodemailer");
-  const transport = nodemailer.createTransport({
-    host,
-    port,
-    secure: port === 465,
-    auth: { user, pass: normalizedPass }
-  });
 
   const from = process.env.CONTACT_FROM_EMAIL ?? user;
   const subject = `【Mediforma Education】お問い合わせ: ${data.name}`;
   const text = toPlainText(data);
 
   try {
-    await transport.verify();
-    await transport.sendMail({
+    const gmailTransport = nodemailer.createTransport({
+      service: "gmail",
+      auth: { user, pass: normalizedPass }
+    });
+    await gmailTransport.sendMail({
       from,
       to: CONTACT_TO,
       replyTo: data.email,
       subject,
       text
     });
-    return { ok: true, channel: "smtp", detail: "sent" };
+    return { ok: true, channel: "smtp", detail: "sent:gmail-service" };
   } catch (error) {
-    const detail =
-      error instanceof Error ? `send-failed:${error.message}` : "send-failed:unknown";
-    return { ok: false, channel: "smtp", detail };
+    if (!host) {
+      const detail = error instanceof Error ? `send-failed:${error.message}` : "send-failed:unknown";
+      return { ok: false, channel: "smtp", detail };
+    }
+
+    try {
+      const fallbackTransport = nodemailer.createTransport({
+        host,
+        port,
+        secure: port === 465,
+        requireTLS: port !== 465,
+        auth: { user, pass: normalizedPass }
+      });
+      await fallbackTransport.sendMail({
+        from,
+        to: CONTACT_TO,
+        replyTo: data.email,
+        subject,
+        text
+      });
+      return { ok: true, channel: "smtp", detail: "sent:custom-host" };
+    } catch (fallbackError) {
+      const detail =
+        fallbackError instanceof Error
+          ? `send-failed:${fallbackError.message}`
+          : error instanceof Error
+            ? `send-failed:${error.message}`
+            : "send-failed:unknown";
+      return { ok: false, channel: "smtp", detail };
+    }
   }
 }
 

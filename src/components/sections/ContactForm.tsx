@@ -13,6 +13,7 @@ type SubmitState = "idle" | "success" | "error";
 export function ContactForm() {
   const [loading, setLoading] = useState(false);
   const [status, setStatus] = useState<SubmitState>("idle");
+  const [errorDetail, setErrorDetail] = useState("");
 
   const labels = contactPageContent.formLabels;
 
@@ -20,6 +21,7 @@ export function ContactForm() {
     event.preventDefault();
     setLoading(true);
     setStatus("idle");
+    setErrorDetail("");
 
     const formData = new FormData(event.currentTarget);
     const payload = {
@@ -42,11 +44,22 @@ export function ContactForm() {
         body: JSON.stringify(payload)
       });
 
-      if (!response.ok) throw new Error("submit failed");
+      if (!response.ok) {
+        const data = await response.json().catch(() => ({}));
+        const detail = Array.isArray(data?.attempts)
+          ? data.attempts
+              .map((attempt: { channel?: string; detail?: string }) => `${attempt.channel ?? "unknown"}:${attempt.detail ?? "failed"}`)
+              .join(" | ")
+          : "submit failed";
+        throw new Error(detail);
+      }
 
       setStatus("success");
       event.currentTarget.reset();
-    } catch {
+    } catch (error) {
+      if (error instanceof Error) {
+        setErrorDetail(error.message);
+      }
       setStatus("error");
     } finally {
       setLoading(false);
@@ -146,7 +159,12 @@ export function ContactForm() {
       </Button>
 
       {status === "success" ? <p className="text-sm text-teal-500">{contactPageContent.successMessage}</p> : null}
-      {status === "error" ? <p className="text-sm text-red-600">{contactPageContent.errorMessage}</p> : null}
+      {status === "error" ? (
+        <div className="space-y-1">
+          <p className="text-sm text-red-600">{contactPageContent.errorMessage}</p>
+          {errorDetail ? <p className="text-xs text-red-500">{errorDetail}</p> : null}
+        </div>
+      ) : null}
     </form>
   );
 }
