@@ -47,7 +47,9 @@ export default async function BlogPostPage({ params }: Props) {
     <article className="bg-white pb-20 pt-32">
       <div className="mx-auto w-full max-w-4xl px-4 md:px-6">
         <p className="text-sm text-neutralGray-400">更新日: {formatDate(post.updatedAt)}</p>
-        <h1 className="mt-3 text-3xl font-bold leading-tight text-navy-900 md:text-5xl">{post.title}</h1>
+        <h1 className="mt-3 text-2xl font-bold leading-tight text-navy-900 md:whitespace-nowrap md:text-[24px]">
+          {post.title}
+        </h1>
         <p className="mt-4 text-neutralGray-600">{post.lead}</p>
         <p className="mt-2 text-sm text-neutralGray-400">執筆: {post.author}</p>
 
@@ -62,12 +64,12 @@ export default async function BlogPostPage({ params }: Props) {
             }
 
             if (block.type === "paragraph") {
-              return <p key={`${block.type}-${idx}`} className="whitespace-pre-line">{block.text}</p>;
+              return <p key={`${block.type}-${idx}`}>{block.text}</p>;
             }
 
             if (block.type === "quote") {
               return (
-                <blockquote key={`${block.type}-${idx}`} className="whitespace-pre-line rounded-xl bg-blueAccent-100 p-5 text-navy-800">
+                <blockquote key={`${block.type}-${idx}`} className="rounded-xl bg-blueAccent-100 p-5 text-navy-800">
                   {block.text}
                 </blockquote>
               );
