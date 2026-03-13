@@ -15,7 +15,7 @@ type ContactPayload = {
 
 type DeliveryResult = {
   ok: boolean;
-  channel: "webhook" | "resend" | "formsubmit";
+  channel: "smtp" | "webhook" | "resend" | "formsubmit";
   detail?: string;
 };
 
@@ -47,6 +47,42 @@ async function sendToWebhook(endpoint: string, data: ContactPayload): Promise<De
   });
 
   return { ok: response.ok, channel: "webhook", detail: `status:${response.status}` };
+}
+
+async function sendToSmtp(data: ContactPayload): Promise<DeliveryResult> {
+  const host = process.env.SMTP_HOST;
+  const port = Number(process.env.SMTP_PORT ?? "465");
+  const user = process.env.SMTP_USER;
+  const pass = process.env.SMTP_PASS;
+
+  if (!host || !user || !pass) {
+    return { ok: false, channel: "smtp", detail: "missing-smtp-env" };
+  }
+
+  const nodemailer = await import("nodemailer");
+  const transport = nodemailer.createTransport({
+    host,
+    port,
+    secure: port === 465,
+    auth: { user, pass }
+  });
+
+  const from = process.env.CONTACT_FROM_EMAIL ?? user;
+  const subject = `【Mediforma Education】お問い合わせ: ${data.name}`;
+  const text = toPlainText(data);
+
+  try {
+    await transport.sendMail({
+      from,
+      to: CONTACT_TO,
+      replyTo: data.email,
+      subject,
+      text
+    });
+    return { ok: true, channel: "smtp", detail: "sent" };
+  } catch {
+    return { ok: false, channel: "smtp", detail: "send-failed" };
+  }
 }
 
 async function sendToResend(apiKey: string, data: ContactPayload): Promise<DeliveryResult> {
@@ -113,6 +149,12 @@ export async function POST(request: Request) {
   const attempts: DeliveryResult[] = [];
 
   try {
+    const smtpResult = await sendToSmtp(data);
+    attempts.push(smtpResult);
+    if (smtpResult.ok) {
+      return NextResponse.json({ ok: true, channel: smtpResult.channel });
+    }
+
     if (endpoint) {
       const webhookResult = await sendToWebhook(endpoint, data);
       attempts.push(webhookResult);
