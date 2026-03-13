@@ -28,7 +28,7 @@ export const blogPageContent = {
 export const blogPosts: BlogPost[] = [
   {
     slug: "kitasato-shiteiko-mensetsu-taisaku",
-    title: "北里大学医学部 指定校推薦　面接対策完全ガイド",
+    title: "倍率1.5倍-2倍！？北里大学医学部学校推薦型選抜を徹底分析！！",
     seoTitle:
       "【現役北里医学部生が教える】北里大学医学部 指定校推薦 面接対策完全ガイド | Mediforma Education",
     description:
