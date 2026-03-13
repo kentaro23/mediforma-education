@@ -47,7 +47,7 @@ export default async function BlogPostPage({ params }: Props) {
     <article className="bg-white pb-20 pt-32">
       <div className="mx-auto w-full max-w-4xl px-4 md:px-6">
         <p className="text-sm text-neutralGray-400">更新日: {formatDate(post.updatedAt)}</p>
-        <h1 className="mt-3 text-3xl font-extrabold leading-none tracking-tight text-navy-900 md:whitespace-nowrap md:text-[38px]">
+        <h1 className="mt-3 whitespace-pre-line text-3xl font-extrabold leading-tight tracking-tight text-teal-500 md:text-[38px]">
           {post.title}
         </h1>
         <p className="mt-4 text-neutralGray-600">{post.lead}</p>
