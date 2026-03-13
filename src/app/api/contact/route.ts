@@ -19,7 +19,10 @@ type DeliveryResult = {
   detail?: string;
 };
 
-const CONTACT_TO = process.env.CONTACT_TO_EMAIL ?? "education@mediforma.jp";
+const CONTACT_TO =
+  process.env.CONTACT_TO_EMAIL ??
+  process.env.CONTACT_TO_MAIL ??
+  "education@mediforma.jp";
 
 function toPlainText(data: ContactPayload) {
   return [
@@ -59,12 +62,13 @@ async function sendToSmtp(data: ContactPayload): Promise<DeliveryResult> {
     return { ok: false, channel: "smtp", detail: "missing-smtp-env" };
   }
 
+  const normalizedPass = pass.replace(/\s+/g, "");
   const nodemailer = await import("nodemailer");
   const transport = nodemailer.createTransport({
     host,
     port,
     secure: port === 465,
-    auth: { user, pass }
+    auth: { user, pass: normalizedPass }
   });
 
   const from = process.env.CONTACT_FROM_EMAIL ?? user;
@@ -72,6 +76,7 @@ async function sendToSmtp(data: ContactPayload): Promise<DeliveryResult> {
   const text = toPlainText(data);
 
   try {
+    await transport.verify();
     await transport.sendMail({
       from,
       to: CONTACT_TO,
@@ -80,8 +85,10 @@ async function sendToSmtp(data: ContactPayload): Promise<DeliveryResult> {
       text
     });
     return { ok: true, channel: "smtp", detail: "sent" };
-  } catch {
-    return { ok: false, channel: "smtp", detail: "send-failed" };
+  } catch (error) {
+    const detail =
+      error instanceof Error ? `send-failed:${error.message}` : "send-failed:unknown";
+    return { ok: false, channel: "smtp", detail };
   }
 }
 
