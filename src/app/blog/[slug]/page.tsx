@@ -62,12 +62,12 @@ export default async function BlogPostPage({ params }: Props) {
             }
 
             if (block.type === "paragraph") {
-              return <p key={`${block.type}-${idx}`}>{block.text}</p>;
+              return <p key={`${block.type}-${idx}`} className="whitespace-pre-line">{block.text}</p>;
             }
 
             if (block.type === "quote") {
               return (
-                <blockquote key={`${block.type}-${idx}`} className="rounded-xl bg-blueAccent-100 p-5 text-navy-800">
+                <blockquote key={`${block.type}-${idx}`} className="whitespace-pre-line rounded-xl bg-blueAccent-100 p-5 text-navy-800">
                   {block.text}
                 </blockquote>
               );
@@ -75,7 +75,7 @@ export default async function BlogPostPage({ params }: Props) {
 
             if (block.type === "note") {
               return (
-                <p key={`${block.type}-${idx}`} className="rounded-xl bg-amber-100 p-5 text-navy-800">
+                <p key={`${block.type}-${idx}`} className="whitespace-pre-line rounded-xl bg-amber-100 p-5 text-navy-800">
                   {block.text}
                 </p>
               );
