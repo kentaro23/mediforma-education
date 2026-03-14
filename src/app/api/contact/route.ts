@@ -42,14 +42,22 @@ function toPlainText(data: ContactPayload) {
   ].join("\n");
 }
 
-async function sendToWebhook(endpoint: string, data: ContactPayload): Promise<DeliveryResult> {
-  const response = await fetch(endpoint, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(data)
-  });
-
-  return { ok: response.ok, channel: "webhook", detail: `status:${response.status}` };
+function toCustomerReplyText(data: ContactPayload) {
+  return [
+    `${data.name} 様`,
+    "",
+    "このたびはMediforma Educationへお問い合わせいただき、ありがとうございます。",
+    "以下の内容で受け付けました。担当より2営業日以内にご連絡いたします。",
+    "",
+    "----- お問い合わせ内容（控え） -----",
+    toPlainText(data),
+    "------------------------------------",
+    "",
+    "Mediforma Education",
+    "https://www.mediformaedu.com",
+    `電話: 080-9322-6024`,
+    `メール: ${CONTACT_TO}`
+  ].join("\n");
 }
 
 async function sendToSmtp(data: ContactPayload): Promise<DeliveryResult> {
@@ -66,8 +74,10 @@ async function sendToSmtp(data: ContactPayload): Promise<DeliveryResult> {
   const nodemailer = await import("nodemailer");
 
   const from = process.env.CONTACT_FROM_EMAIL ?? user;
-  const subject = `【Mediforma Education】お問い合わせ: ${data.name}`;
-  const text = toPlainText(data);
+  const adminSubject = `【Mediforma Education】お問い合わせ: ${data.name}`;
+  const adminText = toPlainText(data);
+  const customerSubject = "【Mediforma Education】お問い合わせありがとうございます";
+  const customerText = toCustomerReplyText(data);
 
   try {
     const gmailTransport = nodemailer.createTransport({
@@ -78,10 +88,17 @@ async function sendToSmtp(data: ContactPayload): Promise<DeliveryResult> {
       from,
       to: CONTACT_TO,
       replyTo: data.email,
-      subject,
-      text
+      subject: adminSubject,
+      text: adminText
     });
-    return { ok: true, channel: "smtp", detail: "sent:gmail-service" };
+    await gmailTransport.sendMail({
+      from,
+      to: data.email,
+      replyTo: CONTACT_TO,
+      subject: customerSubject,
+      text: customerText
+    });
+    return { ok: true, channel: "smtp", detail: "sent:gmail-service+receipt" };
   } catch (error) {
     if (!host) {
       const detail = error instanceof Error ? `send-failed:${error.message}` : "send-failed:unknown";
@@ -100,10 +117,17 @@ async function sendToSmtp(data: ContactPayload): Promise<DeliveryResult> {
         from,
         to: CONTACT_TO,
         replyTo: data.email,
-        subject,
-        text
+        subject: adminSubject,
+        text: adminText
       });
-      return { ok: true, channel: "smtp", detail: "sent:custom-host" };
+      await fallbackTransport.sendMail({
+        from,
+        to: data.email,
+        replyTo: CONTACT_TO,
+        subject: customerSubject,
+        text: customerText
+      });
+      return { ok: true, channel: "smtp", detail: "sent:custom-host+receipt" };
     } catch (fallbackError) {
       const detail =
         fallbackError instanceof Error
@@ -118,10 +142,7 @@ async function sendToSmtp(data: ContactPayload): Promise<DeliveryResult> {
 
 async function sendToResend(apiKey: string, data: ContactPayload): Promise<DeliveryResult> {
   const from = process.env.CONTACT_FROM_EMAIL ?? "Mediforma Education <onboarding@resend.dev>";
-  const subject = `【Mediforma Education】お問い合わせ: ${data.name}`;
-  const text = toPlainText(data);
-
-  const response = await fetch("https://api.resend.com/emails", {
+  const adminResponse = await fetch("https://api.resend.com/emails", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -131,29 +152,35 @@ async function sendToResend(apiKey: string, data: ContactPayload): Promise<Deliv
       from,
       to: [CONTACT_TO],
       reply_to: data.email,
-      subject,
-      text
+      subject: `【Mediforma Education】お問い合わせ: ${data.name}`,
+      text: toPlainText(data)
     })
   });
 
-  return { ok: response.ok, channel: "resend", detail: `status:${response.status}` };
-}
+  if (!adminResponse.ok) {
+    return { ok: false, channel: "resend", detail: `status:${adminResponse.status}` };
+  }
 
-async function sendToFormSubmit(data: ContactPayload): Promise<DeliveryResult> {
-  const response = await fetch(`https://formsubmit.co/ajax/${CONTACT_TO}`, {
+  const customerResponse = await fetch("https://api.resend.com/emails", {
     method: "POST",
-    headers: { "Content-Type": "application/json", Accept: "application/json" },
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${apiKey}`
+    },
     body: JSON.stringify({
-      name: data.name,
-      email: data.email,
-      message: toPlainText(data),
-      _subject: `【Mediforma Education】お問い合わせ: ${data.name}`,
-      _captcha: "false",
-      _template: "table"
+      from,
+      to: [data.email],
+      reply_to: CONTACT_TO,
+      subject: "【Mediforma Education】お問い合わせありがとうございます",
+      text: toCustomerReplyText(data)
     })
   });
 
-  return { ok: response.ok, channel: "formsubmit", detail: `status:${response.status}` };
+  return {
+    ok: customerResponse.ok,
+    channel: "resend",
+    detail: customerResponse.ok ? "sent:resend+receipt" : `status:${customerResponse.status}`
+  };
 }
 
 export async function POST(request: Request) {
@@ -175,7 +202,6 @@ export async function POST(request: Request) {
     return NextResponse.json({ ok: false }, { status: 400 });
   }
 
-  const endpoint = process.env.CONTACT_FORM_ENDPOINT;
   const resendKey = process.env.RESEND_API_KEY;
   const attempts: DeliveryResult[] = [];
 
@@ -186,26 +212,12 @@ export async function POST(request: Request) {
       return NextResponse.json({ ok: true, channel: smtpResult.channel });
     }
 
-    if (endpoint) {
-      const webhookResult = await sendToWebhook(endpoint, data);
-      attempts.push(webhookResult);
-      if (webhookResult.ok) {
-        return NextResponse.json({ ok: true, channel: webhookResult.channel });
-      }
-    }
-
     if (resendKey) {
       const resendResult = await sendToResend(resendKey, data);
       attempts.push(resendResult);
       if (resendResult.ok) {
         return NextResponse.json({ ok: true, channel: resendResult.channel });
       }
-    }
-
-    const formsubmitResult = await sendToFormSubmit(data);
-    attempts.push(formsubmitResult);
-    if (formsubmitResult.ok) {
-      return NextResponse.json({ ok: true, channel: formsubmitResult.channel });
     }
 
     return NextResponse.json({ ok: false, attempts }, { status: 502 });

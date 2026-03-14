@@ -1,6 +1,7 @@
 "use client";
 
 import { FormEvent, useState } from "react";
+import { useRouter } from "next/navigation";
 import { Checkbox } from "@/components/ui/Checkbox";
 import { Input } from "@/components/ui/Input";
 import { Select } from "@/components/ui/Select";
@@ -11,6 +12,7 @@ import { contactFormOptions, contactPageContent } from "@/lib/page-content";
 type SubmitState = "idle" | "success" | "error";
 
 export function ContactForm() {
+  const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [status, setStatus] = useState<SubmitState>("idle");
   const [errorDetail, setErrorDetail] = useState("");
@@ -55,8 +57,9 @@ export function ContactForm() {
         throw new Error(detail);
       }
 
-      setStatus("success");
       form.reset();
+      setStatus("success");
+      router.push("/contact/thanks");
     } catch (error) {
       if (error instanceof Error) {
         setErrorDetail(error.message);

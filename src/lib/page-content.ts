@@ -68,6 +68,18 @@ export const contactPageContent = {
   }
 } as const;
 
+export const contactThanksPageContent = {
+  heroTitle: "お問い合わせありがとうございます",
+  heroDescription:
+    "ご入力内容を受け付けました。確認用メールをお送りしていますので、ご確認ください。",
+  nextTitle: "次におすすめのページ",
+  nextDescription:
+    "指定校推薦対策の詳細ページで、講座内容・料金・年間スケジュールをご確認いただけます。",
+  nextLinkLabel: "指定校推薦対策の詳細を見る",
+  nextLinkHref: "/shiteiko?from=contact-thanks",
+  note: "メールが届かない場合は、迷惑メールフォルダもあわせてご確認ください。"
+} as const;
+
 export const contactFormOptions = {
   relation: ["本人", "保護者", "その他"],
   grade: ["高1", "高2", "高3", "既卒", "中学生", "その他"],

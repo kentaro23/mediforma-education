@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 
-const baseUrl = "https://mediforma-education.vercel.app";
+const baseUrl = "https://www.mediformaedu.com";
 
 export const sharedMetadata: Metadata = {
   metadataBase: new URL(baseUrl),
@@ -49,6 +49,12 @@ export const aboutMetadata: Metadata = {
 export const contactMetadata: Metadata = {
   title: "お問い合わせ | Mediforma Education",
   description: "指定校推薦対策講座・個別指導塾に関するお問い合わせはこちら。"
+};
+
+export const contactThanksMetadata: Metadata = {
+  title: "お問い合わせ完了 | Mediforma Education",
+  description:
+    "お問い合わせありがとうございます。Mediforma Educationから確認メールをお送りします。"
 };
 
 export const privacyMetadata: Metadata = {
