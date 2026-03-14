@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import Script from "next/script";
 import { Button } from "@/components/ui/Button";
 import { getBlogPostBySlug, blogPosts } from "@/lib/blog-data";
 
@@ -25,7 +26,6 @@ function GiftBanner() {
       <div className="mt-4">
         <Button href="/contact">▶ 無料相談はこちら</Button>
       </div>
-      <p className="mt-3 text-sm text-neutralGray-600">mediformaedu.com/contact</p>
     </div>
   );
 }
@@ -39,10 +39,15 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title: post.seoTitle,
     description: post.description,
     keywords: post.keywords,
+    alternates: {
+      canonical: `https://www.mediformaedu.com/blog/${post.slug}`
+    },
     openGraph: {
       title: post.seoTitle,
       description: post.description,
       type: "article",
+      url: `https://www.mediformaedu.com/blog/${post.slug}`,
+      siteName: "Mediforma Education",
       publishedTime: post.publishedAt,
       modifiedTime: post.updatedAt
     }
@@ -61,12 +66,34 @@ export default async function BlogPostPage({ params }: Props) {
     notFound();
   }
 
+  const articleJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: post.seoTitle.replace(" | Mediforma Education", ""),
+    author: { "@type": "Organization", name: "Mediforma Education" },
+    publisher: {
+      "@type": "Organization",
+      name: "Mediforma Education",
+      url: "https://www.mediformaedu.com"
+    },
+    datePublished: post.publishedAt,
+    dateModified: post.updatedAt,
+    description: post.description,
+    mainEntityOfPage: `https://www.mediformaedu.com/blog/${post.slug}`
+  };
+
   return (
     <>
+      <Script
+        id={`blog-${post.slug}-jsonld`}
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }}
+      />
+
       <section className="bg-gradient-to-br from-navy-900 to-navy-800 pb-14 pt-36 text-white">
         <div className="mx-auto max-w-6xl px-4 md:px-6">
           <span className="inline-flex rounded-full border border-teal-400/50 bg-teal-500/20 px-3 py-1 text-xs font-semibold text-teal-100">
-            面接対策
+            {post.category ?? "面接対策"}
           </span>
           <h1 className="mt-4 whitespace-pre-line text-3xl font-bold leading-tight md:text-5xl">{post.title}</h1>
           <p className="mt-4 max-w-4xl text-white/85 md:text-lg">{post.lead}</p>
@@ -97,8 +124,29 @@ export default async function BlogPostPage({ params }: Props) {
               );
             }
 
+            if (block.type === "subheading") {
+              return (
+                <h3 key={`${block.type}-${idx}`} className="text-xl font-bold leading-tight text-navy-900">
+                  {block.text}
+                </h3>
+              );
+            }
+
             if (block.type === "paragraph") {
               return <p key={`${block.type}-${idx}`}>{block.text}</p>;
+            }
+
+            if (block.type === "tip") {
+              return (
+                <aside key={`${block.type}-${idx}`} className="rounded-xl border border-neutralGray-100 bg-white p-5 shadow-soft">
+                  <div className="border-l-4 border-teal-500 pl-4">
+                    <p className="text-sm font-semibold text-teal-500">
+                      {block.icon} {block.title}
+                    </p>
+                    <p className="mt-2 text-sm leading-relaxed text-neutralGray-600">{block.body}</p>
+                  </div>
+                </aside>
+              );
             }
 
             if (block.type === "quote") {
@@ -155,17 +203,20 @@ export default async function BlogPostPage({ params }: Props) {
             );
           })}
 
-          {slug === "kitasato-shiteiko-mensetsu-taisaku" ? (
+          {post.relatedArticles?.length ? (
             <section className="rounded-2xl border border-neutralGray-100 bg-neutralGray-50 p-5">
-              <p className="text-sm font-semibold text-navy-900">
-                ▶ 関連記事: 面接対策資料の中身を一部公開しています
-              </p>
-              <Link
-                href="/blog/kitasato-shiteiko-mensetsu-shiryo"
-                className="mt-2 inline-flex text-sm font-semibold text-teal-500 hover:text-teal-400"
-              >
-                → /blog/kitasato-shiteiko-mensetsu-shiryo
-              </Link>
+              <p className="text-sm font-semibold text-navy-900">▶ 関連記事</p>
+              <div className="mt-2 flex flex-col gap-2">
+                {post.relatedArticles.map((related) => (
+                  <Link
+                    key={related.href}
+                    href={related.href}
+                    className="inline-flex text-sm font-semibold text-teal-500 hover:text-teal-400"
+                  >
+                    → {related.label}
+                  </Link>
+                ))}
+              </div>
             </section>
           ) : null}
 

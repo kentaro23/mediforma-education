@@ -327,15 +327,27 @@ export default function KitasatoMensetsuShiryoPage() {
           </section>
 
           <section className="rounded-2xl border border-neutralGray-100 bg-neutralGray-50 p-5">
-            <p className="text-sm font-semibold text-navy-900">
-              ▶ 関連記事: 北里大学医学部 指定校推薦 面接対策完全ガイド
-            </p>
-            <Link
-              href="/blog/kitasato-shiteiko-mensetsu-taisaku"
-              className="mt-2 inline-flex text-sm font-semibold text-teal-500 hover:text-teal-400"
-            >
-              → /blog/kitasato-shiteiko-mensetsu-taisaku
-            </Link>
+            <p className="text-sm font-semibold text-navy-900">▶ 関連記事</p>
+            <div className="mt-2 flex flex-col gap-2">
+              <Link
+                href="/blog/kitasato-shiteiko-mensetsu-taisaku"
+                className="inline-flex text-sm font-semibold text-teal-500 hover:text-teal-400"
+              >
+                → 北里大学医学部 指定校推薦 面接対策完全ガイド
+              </Link>
+              <Link
+                href="/blog/kitasato-shiteiko-iryou-rinri"
+                className="inline-flex text-sm font-semibold text-teal-500 hover:text-teal-400"
+              >
+                → 医療倫理・時事テーマ解説
+              </Link>
+              <Link
+                href="/blog/kitasato-shiteiko-shutsugan-junbi"
+                className="inline-flex text-sm font-semibold text-teal-500 hover:text-teal-400"
+              >
+                → 出願準備の完全ガイド
+              </Link>
+            </div>
           </section>
         </div>
       </article>
