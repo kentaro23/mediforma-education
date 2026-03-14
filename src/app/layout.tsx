@@ -39,6 +39,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ja">
+      <head>
+        <script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3029043086211373"
+          crossOrigin="anonymous"
+        />
+      </head>
       <body className={`${notoSansJp.variable} ${poppins.variable}`}>
         <Script
           id="educational-organization-jsonld"
@@ -46,12 +53,6 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{
             __html: JSON.stringify(educationalOrganizationJsonLd)
           }}
-        />
-        <Script
-          id="adsense-script"
-          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3029043086211373"
-          strategy="beforeInteractive"
-          crossOrigin="anonymous"
         />
         <Header />
         <main>{children}</main>
