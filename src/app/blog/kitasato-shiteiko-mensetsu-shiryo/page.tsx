@@ -45,32 +45,18 @@ const articleJsonLd = {
   mainEntityOfPage: "https://www.mediformaedu.com/blog/kitasato-shiteiko-mensetsu-shiryo"
 };
 
-function GiftBanner({ compact = false }: { compact?: boolean }) {
+function GiftBanner() {
   return (
-    <div
-      className={`rounded-2xl border border-teal-100 bg-gradient-to-r from-teal-100/50 to-blueAccent-100/40 p-5 ${
-        compact ? "text-white" : ""
-      }`}
-    >
-      <p className={`text-sm font-semibold ${compact ? "text-teal-100" : "text-teal-500"}`}>🎁 無料相談特典</p>
-      <h3 className={`mt-1 text-xl font-bold ${compact ? "text-white" : "text-navy-900"}`}>
-        無料相談で「面接対策資料」をプレゼント！
-      </h3>
-      <p className={`mt-3 text-sm leading-relaxed ${compact ? "text-white/85" : "text-neutralGray-600"}`}>
-        {compact
-          ? "お子様の現状と志望動機をお聞かせください。面接対策資料（全編）をその場でお渡しします。"
-          : "この記事で紹介している面接対策資料（全編）を、無料相談にお越しいただいた方全員に無料でお渡ししています。"}
+    <div className="rounded-2xl border border-teal-100 bg-gradient-to-r from-teal-100/50 to-blueAccent-100/40 p-5">
+      <p className="text-sm font-semibold text-teal-500">🎁 無料相談特典</p>
+      <h3 className="mt-1 text-xl font-bold text-navy-900">無料相談で「面接対策資料」をプレゼント！</h3>
+      <p className="mt-3 text-sm leading-relaxed text-neutralGray-600">
+        この記事で紹介している面接対策資料（全編）を、無料相談にお越しいただいた方全員に無料でお渡ししています。
       </p>
       <div className="mt-4">
-        <Button href="/contact" className={compact ? "bg-white text-navy-900 hover:bg-neutralGray-50" : ""}>
-          ▶ 無料相談はこちら
-        </Button>
+        <Button href="/contact">▶ 無料相談はこちら</Button>
       </div>
-      {compact ? (
-        <p className="mt-3 text-sm text-white/90">電話: 080-9322-6024 / メール: education@mediforma.jp</p>
-      ) : (
-        <p className="mt-3 text-sm text-neutralGray-600">mediformaedu.com/contact</p>
-      )}
+      <p className="mt-3 text-sm text-neutralGray-600">mediformaedu.com/contact</p>
     </div>
   );
 }
@@ -337,8 +323,8 @@ export default function KitasatoMensetsuShiryoPage() {
             </p>
           </section>
 
-          <section className="rounded-2xl bg-gradient-to-br from-navy-900 to-navy-800 p-6">
-            <GiftBanner compact />
+          <section>
+            <GiftBanner />
           </section>
 
           <section className="rounded-2xl border border-neutralGray-100 bg-neutralGray-50 p-5">
