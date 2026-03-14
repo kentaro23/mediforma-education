@@ -47,6 +47,12 @@ export default function RootLayout({
             __html: JSON.stringify(educationalOrganizationJsonLd)
           }}
         />
+        <Script
+          id="adsense-script"
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3029043086211373"
+          strategy="afterInteractive"
+          crossOrigin="anonymous"
+        />
         <Header />
         <main>{children}</main>
         <FamilyBanner />
