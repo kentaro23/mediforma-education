@@ -60,5 +60,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.8
   }));
 
-  return [...staticEntries, ...blogEntries];
+  const extraBlogEntries: MetadataRoute.Sitemap = [
+    {
+      url: `${base}/blog/kitasato-shiteiko-mensetsu-shiryo`,
+      lastModified: new Date("2026-03-14"),
+      changeFrequency: "monthly",
+      priority: 0.8
+    }
+  ];
+
+  return [...staticEntries, ...blogEntries, ...extraBlogEntries];
 }

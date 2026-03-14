@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getBlogPostBySlug, blogPosts } from "@/lib/blog-data";
 
@@ -120,6 +121,20 @@ export default async function BlogPostPage({ params }: Props) {
               </div>
             );
           })}
+
+          {slug === "kitasato-shiteiko-mensetsu-taisaku" ? (
+            <section className="rounded-2xl border border-neutralGray-100 bg-neutralGray-50 p-5">
+              <p className="text-sm font-semibold text-navy-900">
+                ▶ 関連記事: 面接対策資料の中身を一部公開しています
+              </p>
+              <Link
+                href="/blog/kitasato-shiteiko-mensetsu-shiryo"
+                className="mt-2 inline-flex text-sm font-semibold text-teal-500 hover:text-teal-400"
+              >
+                → /blog/kitasato-shiteiko-mensetsu-shiryo
+              </Link>
+            </section>
+          ) : null}
         </div>
       </div>
     </article>
