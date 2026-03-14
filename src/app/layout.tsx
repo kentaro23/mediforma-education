@@ -45,6 +45,17 @@ export default function RootLayout({
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3029043086211373"
           crossOrigin="anonymous"
         />
+        <script async src="https://www.googletagmanager.com/gtag/js?id=AW-18014416876" />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', 'AW-18014416876');
+            `
+          }}
+        />
       </head>
       <body className={`${notoSansJp.variable} ${poppins.variable}`}>
         <Script
