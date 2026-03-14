@@ -56,7 +56,6 @@ function GiftBanner() {
       <div className="mt-4">
         <Button href="/contact">▶ 無料相談はこちら</Button>
       </div>
-      <p className="mt-3 text-sm text-neutralGray-600">mediformaedu.com/contact</p>
     </div>
   );
 }
