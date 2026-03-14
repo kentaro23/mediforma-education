@@ -2,16 +2,16 @@ export const mediformaFamilyData = {
   label: "Mediforma Family",
   subtext: "本サービスはMediformaグループの提供です",
   heading: "Mediforma Family",
-  ctaLabel: "Mediforma.comで詳しく見る",
-  ctaHref: "https://mediforma.com",
+  ctaLabel: "Mediforma.jpで詳しく見る",
+  ctaHref: "https://mediforma.jp",
   services: [
     {
       name: "Society",
-      href: "https://mediforma.com/society"
+      href: "https://mediforma.jp/society"
     },
     {
       name: "DX",
-      href: "https://mediforma.com/dx"
+      href: "https://mediforma.jp/dx"
     },
     {
       name: "Education",
@@ -19,7 +19,7 @@ export const mediformaFamilyData = {
     },
     {
       name: "Consulting",
-      href: "https://mediforma.com/consulting"
+      href: "https://mediforma.jp/consulting"
     }
   ]
 } as const;

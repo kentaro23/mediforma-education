@@ -7,7 +7,7 @@ export const siteConfig = {
   phone: "080-9322-6024",
   email: "education@mediforma.jp",
   parentServiceName: "Mediforma",
-  parentServiceUrl: "https://mediforma.com",
+  parentServiceUrl: "https://mediforma.jp",
   copyright: "© 2026 Mediforma Education. All rights reserved.",
   seoKeywords: [
     "北里大学医学部 指定校推薦",

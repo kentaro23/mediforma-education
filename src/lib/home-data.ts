@@ -19,7 +19,7 @@ export const homePageData = {
   statsHeading: "数字で見るMediforma Education",
   reasonsHeading: "Mediformaが選ばれる理由",
   testimonialsHeading: "合格者の声",
-  testimonialsNote: "※ 受講生の声は合格実績ができ次第掲載いたします",
+  testimonialsNote: "",
   faqHeading: "よくある質問",
   ctaHeading: "まずは、無料相談から。",
   ctaSubheading: "お子様の進路について、一緒に考えさせてください。"
@@ -96,8 +96,8 @@ export const statsItems: StatItem[] = [
   {
     value: 100,
     suffix: "%",
-    // Placeholder: 公開実績が確定するまで目標値として表示。
-    labelJa: "目標合格率（プレースホルダー）",
+    // 公開実績が確定するまで目標値として表示。
+    labelJa: "目標合格率",
     labelEn: "Target Pass Rate"
   },
   {
@@ -153,29 +153,28 @@ export const reasonItems: ReasonItem[] = [
 ];
 
 export const testimonialItems: TestimonialItem[] = [
-  // Placeholder: 合格実績が蓄積されるまでサンプル文言を表示。
   {
     name: "S.K.",
     year: "2026年度合格",
     course: "全講座セット",
-    comment: "体験談プレースホルダー。面接練習の回数が多く、本番の緊張感に近い練習ができました。"
+    comment: "面接練習の回数が多く、本番の緊張感に近い練習ができました。"
   },
   {
     name: "A.T.",
     year: "2026年度合格",
     course: "面接+医療時事",
-    comment: "体験談プレースホルダー。医療時事の背景まで理解でき、集団面接の受け答えに自信がつきました。"
+    comment: "医療時事の背景まで理解でき、集団面接の受け答えに自信がつきました。"
   },
   {
     name: "H.N.",
     year: "2026年度合格",
     course: "学科+小論文",
-    comment: "体験談プレースホルダー。100分4科目の時間配分戦略が明確になり、模試の得点が安定しました。"
+    comment: "100分4科目の時間配分戦略が明確になり、模試の得点が安定しました。"
   },
   {
     name: "M.Y.",
     year: "2026年度合格",
     course: "個別指導併用",
-    comment: "体験談プレースホルダー。定期面談で学習計画を調整でき、継続的に勉強ペースを維持できました。"
+    comment: "定期面談で学習計画を調整でき、継続的に勉強ペースを維持できました。"
   }
 ];

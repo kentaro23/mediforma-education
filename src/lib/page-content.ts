@@ -41,7 +41,7 @@ export const aboutPageContent = {
   messageTitle: "事業責任者メッセージ",
   messageBody:
     "Mediforma Educationは、受験テクニックの提供だけでなく、医療人としての土台づくりまで見据えた教育を重視しています。受験生と保護者の不安に正面から向き合い、進路選択を伴走することをお約束します。",
-  photoPlaceholder: "事業責任者写真プレースホルダー"
+  photoPlaceholder: "事業責任者写真"
 } as const;
 
 export const contactPageContent = {
