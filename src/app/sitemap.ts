@@ -1,31 +1,57 @@
 import type { MetadataRoute } from "next";
 import { blogPosts } from "@/lib/blog-data";
 
-const base = "https://mediforma-education.vercel.app";
+const base = "https://www.mediformaedu.com";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const staticPaths = [
-    "",
-    "/blog",
-    "/shiteiko",
-    "/kobetsu",
-    "/about",
-    "/contact",
-    "/privacy"
+  const staticEntries: MetadataRoute.Sitemap = [
+    {
+      url: `${base}/`,
+      lastModified: new Date(),
+      changeFrequency: "weekly",
+      priority: 1.0
+    },
+    {
+      url: `${base}/shiteiko`,
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.9
+    },
+    {
+      url: `${base}/kobetsu`,
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.8
+    },
+    {
+      url: `${base}/about`,
+      lastModified: new Date(),
+      changeFrequency: "yearly",
+      priority: 0.5
+    },
+    {
+      url: `${base}/contact`,
+      lastModified: new Date(),
+      changeFrequency: "yearly",
+      priority: 0.5
+    },
+    {
+      url: `${base}/privacy`,
+      lastModified: new Date(),
+      changeFrequency: "yearly",
+      priority: 0.3
+    }
   ];
 
-  const staticEntries = staticPaths.map((path) => ({
-    url: `${base}${path}`,
-    lastModified: new Date(),
-    changeFrequency: "weekly" as const,
-    priority: path === "" ? 1 : 0.8
-  }));
-
-  const blogEntries = blogPosts.map((post) => ({
+  // Blog URLs are generated dynamically for future post additions.
+  const blogEntries: MetadataRoute.Sitemap = blogPosts.map((post) => ({
     url: `${base}/blog/${post.slug}`,
-    lastModified: new Date(post.updatedAt),
-    changeFrequency: "monthly" as const,
-    priority: 0.75
+    lastModified:
+      post.slug === "kitasato-shiteiko-mensetsu-taisaku"
+        ? new Date("2026-03-14")
+        : new Date(post.updatedAt),
+    changeFrequency: "monthly",
+    priority: 0.8
   }));
 
   return [...staticEntries, ...blogEntries];

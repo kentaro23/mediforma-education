@@ -6,6 +6,6 @@ export default function robots(): MetadataRoute.Robots {
       userAgent: "*",
       allow: "/"
     },
-    sitemap: "https://mediforma-education.vercel.app/sitemap.xml"
+    sitemap: "https://www.mediformaedu.com/sitemap.xml"
   };
 }
