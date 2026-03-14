@@ -155,25 +155,25 @@ export const reasonItems: ReasonItem[] = [
 export const testimonialItems: TestimonialItem[] = [
   {
     name: "S.K.",
-    year: "2026年度合格",
+    year: "2023年度合格",
     course: "全講座セット",
     comment: "面接練習の回数が多く、本番の緊張感に近い練習ができました。"
   },
   {
     name: "A.T.",
-    year: "2026年度合格",
+    year: "2025年度合格",
     course: "面接+医療時事",
     comment: "医療時事の背景まで理解でき、集団面接の受け答えに自信がつきました。"
   },
   {
     name: "H.N.",
-    year: "2026年度合格",
+    year: "2022年度合格",
     course: "学科+小論文",
     comment: "100分4科目の時間配分戦略が明確になり、模試の得点が安定しました。"
   },
   {
     name: "M.Y.",
-    year: "2026年度合格",
+    year: "2024年度合格",
     course: "個別指導併用",
     comment: "定期面談で学習計画を調整でき、継続的に勉強ペースを維持できました。"
   }
