@@ -15,29 +15,20 @@ export function Accordion({ items }: AccordionProps) {
     <div className="space-y-3">
       {items.map((item, index) => {
         const isOpen = openIndex === index;
-        const alwaysVisible = item.answer.length <= 42;
-        const expanded = isOpen || alwaysVisible;
+        const expanded = isOpen;
 
         return (
           <div key={item.question} className="rounded-xl border border-neutralGray-100 bg-white">
             <button
               type="button"
-              onClick={() => {
-                if (alwaysVisible) return;
-                setOpenIndex(isOpen ? -1 : index);
-              }}
+              onClick={() => setOpenIndex(isOpen ? -1 : index)}
               aria-expanded={expanded}
-              className={clsx(
-                "flex w-full items-start justify-between gap-4 px-5 py-4 text-left",
-                alwaysVisible && "cursor-default"
-              )}
+              className="flex w-full items-start justify-between gap-4 px-5 py-4 text-left"
             >
               <span className="flex-1 pr-2 text-[15px] font-medium leading-relaxed text-navy-900 md:text-base">
                 {item.question}
               </span>
-              {!alwaysVisible ? (
-                <span className="mt-0.5 shrink-0 text-teal-500">{isOpen ? "−" : "+"}</span>
-              ) : null}
+              <span className="mt-0.5 shrink-0 text-teal-500">{isOpen ? "−" : "+"}</span>
             </button>
             <div
               className={clsx(

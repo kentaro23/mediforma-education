@@ -5,7 +5,7 @@ export const shiteikoPageContent = {
   pricingSectionTitle: "料金表",
   benefitsSectionTitle: "全講座に含まれる特典",
   timelineSectionTitle: "年間スケジュール",
-  ctaMessage: "定員15名。お早めにご相談ください。",
+  ctaMessage: "定員30名。お早めにご相談ください。",
   ctaSubmessage: "まずは現状の学習状況をお聞かせください。"
 } as const;
 
