@@ -35,7 +35,7 @@ export function Header() {
           "fixed inset-x-0 top-0 z-50 transition-all duration-300",
           scrolled
             ? "border-b border-neutralGray-100 bg-white/95 shadow-sm backdrop-blur"
-            : "border-b border-white/10 bg-navy-900/45 backdrop-blur-md"
+            : "border-b border-white/10 bg-navy-900"
         )}
       >
         <div className="mx-auto flex h-20 w-full max-w-6xl items-center justify-between px-4 md:px-6">
