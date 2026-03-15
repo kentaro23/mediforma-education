@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { CampaignNotice } from "@/components/sections/CampaignNotice";
 import { Badge } from "@/components/ui/Badge";
 import { Button } from "@/components/ui/Button";
 import { ctaLabels } from "@/lib/constants";
@@ -59,6 +60,9 @@ export function HeroSection() {
                 {badge.label}
               </Badge>
             ))}
+          </motion.div>
+          <motion.div variants={{ hidden: { opacity: 0, y: 18 }, show: { opacity: 1, y: 0 } }}>
+            <CampaignNotice />
           </motion.div>
         </motion.div>
       </div>

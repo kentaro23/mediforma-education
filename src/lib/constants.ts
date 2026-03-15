@@ -14,7 +14,16 @@ export const siteConfig = {
     "医学部 予備校",
     "医学生 講師",
     "個別指導塾"
-  ]
+  ],
+  campaign: {
+    capacity: 5,
+    remaining: 3,
+    title: "不合格なら全額返金キャンペーン",
+    description:
+      "先着5名限定で、指定校推薦対策 全講座セット受講後に不合格となった場合は受講料を全額返金します。",
+    note:
+      "※ 適用条件の詳細は無料相談時にご案内します。枠が埋まり次第終了となります。"
+  }
 } as const;
 
 export const navItems: NavItem[] = [

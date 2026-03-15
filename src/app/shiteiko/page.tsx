@@ -1,3 +1,4 @@
+import { CampaignNotice } from "@/components/sections/CampaignNotice";
 import { CourseDetail } from "@/components/sections/CourseDetail";
 import { CTASection } from "@/components/sections/CTASection";
 import { PricingTable } from "@/components/sections/PricingTable";
@@ -19,6 +20,7 @@ export default function ShiteikoPage() {
         <div className="mx-auto max-w-6xl space-y-4 px-4 md:px-6">
           <h1 className="text-3xl font-bold md:text-5xl">{shiteikoPageContent.heroTitle}</h1>
           <p className="text-white/85 lg:whitespace-nowrap">{shiteikoPageContent.heroSubtitle}</p>
+          <CampaignNotice className="max-w-3xl" />
         </div>
       </section>
 
