@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import Script from "next/script";
+import { BlogViewCounter } from "@/components/shared/BlogViewCounter";
 import { Button } from "@/components/ui/Button";
 import { getBlogPostBySlug, blogPosts } from "@/lib/blog-data";
 
@@ -100,6 +101,7 @@ export default async function BlogPostPage({ params }: Props) {
           <p className="mt-4 text-sm text-white/75">
             更新日: {formatDate(post.updatedAt)} | 執筆: {post.author}
           </p>
+          <BlogViewCounter slug={slug} className="mt-2" />
         </div>
       </section>
 

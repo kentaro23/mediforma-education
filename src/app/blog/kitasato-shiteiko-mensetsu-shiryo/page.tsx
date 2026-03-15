@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import Script from "next/script";
+import { BlogViewCounter } from "@/components/shared/BlogViewCounter";
 import { Button } from "@/components/ui/Button";
 
 export const metadata: Metadata = {
@@ -94,6 +95,7 @@ export default function KitasatoMensetsuShiryoPage() {
             入室作法、想定質問30問+、医療倫理の回答戦略など。現役北里医学部生作成の実践ガイドを一部公開します。
           </p>
           <p className="mt-4 text-sm text-white/75">更新日: 2026年3月14日 | 執筆: Mediforma Education 編集部</p>
+          <BlogViewCounter slug="kitasato-shiteiko-mensetsu-shiryo" className="mt-2" />
         </div>
       </section>
 
