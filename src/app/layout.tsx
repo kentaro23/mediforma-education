@@ -45,14 +45,14 @@ export default function RootLayout({
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3029043086211373"
           crossOrigin="anonymous"
         />
-        <script async src="https://www.googletagmanager.com/gtag/js?id=AW-18014416876" />
+        <script async src="https://www.googletagmanager.com/gtag/js?id=AW-18017442530" />
         <script
           dangerouslySetInnerHTML={{
             __html: `
               window.dataLayer = window.dataLayer || [];
               function gtag(){dataLayer.push(arguments);}
               gtag('js', new Date());
-              gtag('config', 'AW-18014416876');
+              gtag('config', 'AW-18017442530');
             `
           }}
         />
